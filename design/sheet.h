@@ -24,6 +24,9 @@ public:
     const Cell* GetConcreteCell(Position pos) const;
     Cell* GetConcreteCell(Position pos);
 
+    void CheckCyclicDependences(const Cell*) const;
+    void InvalidateCache(Cell*);
+
 private:
     void MaybeIncreaseSizeToIncludePosition(Position pos);
     void PrintCells(std::ostream& output,
