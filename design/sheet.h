@@ -7,6 +7,8 @@
 
 class Sheet : public SheetInterface {
 public:
+    using CellsMatrix = std::vector<std::vector<std::unique_ptr<CellInterface>>>;
+
     ~Sheet();
 
     void SetCell(Position pos, std::string text) override;
@@ -21,17 +23,9 @@ public:
     void PrintValues(std::ostream& output) const override;
     void PrintTexts(std::ostream& output) const override;
 
-    const Cell* GetConcreteCell(Position pos) const;
-    Cell* GetConcreteCell(Position pos);
-
     void CheckCyclicDependences(const Cell*) const;
-    void InvalidateCache(Cell*);
 
 private:
-    void MaybeIncreaseSizeToIncludePosition(Position pos);
-    void PrintCells(std::ostream& output,
-                    const std::function<void(const CellInterface&)>& printCell) const;
-    Size GetActualSize() const;
-
-    std::vector<std::vector<std::unique_ptr<Cell>>> cells_;
+    CellsMatrix cells_;
+    Size min_print_size_{0,0};
 };

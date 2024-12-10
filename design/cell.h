@@ -14,6 +14,7 @@ public:
     Value GetValue() const override;
     std::string GetText() const override;
     std::unordered_set<Cell*>& GetCellsOnDepends();
+    void CacheInvalidate();
 
 private:
 //можете воспользоваться нашей подсказкой, но это необязательно.
